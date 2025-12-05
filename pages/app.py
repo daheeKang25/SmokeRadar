@@ -12,7 +12,7 @@ st.caption("데이터과학 미니프로젝트 프로토타입")
 # 데이터 불러오기
 if 'df' not in st.session_state:
     try:
-        st.session_state.df = pd.read_csv("dataset.csv")
+        st.session_state.df = pd.read_csv("pages/dataset.csv")
     except FileNotFoundError:
         st.error("데이터 파일을 찾을 수 없습니다.")
         st.stop()
@@ -20,14 +20,19 @@ df = st.session_state.df
 
 # 사이드바 설정
 st.sidebar.header("현재 위치 설정")
-selected_gu = st.sidebar.selectbox("지역 선택", ["성동구", "성북구", "서초구","용산구", "강남구", "중구", "종로구"])
+selected_gu = st.sidebar.selectbox("지역 선택", ["성동구", "용산구", "서초구","성북구", "강남구", "중구", "종로구"])
 
 # 지도 중심 좌표 설정
-map_center = [37.555, 127.045]
-zoom_level = 14
-
-if selected_gu != "성동구":
-    st.sidebar.warning("현재는 성동구만 선택가능합니다.")
+if selected_gu == "성동구":
+    map_center = [37.555, 127.045]
+    zoom_level = 14
+    filtered_df = df[(df['id'] >= 1) & (df['id'] <= 80)]
+elif selected_gu == "용산구":
+    map_center = [37.532, 126.990]
+    zoom_level = 14
+    filtered_df = df[(df['id'] >= 81) & (df['id'] <= 156)]
+else:
+    st.sidebar.warning("현재는 성동구와 용산구만 선택가능합니다.")
 
 
 # 메인 화면 구성
@@ -40,7 +45,7 @@ with col1:
     m = folium.Map(location=map_center, zoom_start=zoom_level)
 
     # 마커 표시
-    for idx, row in df.iterrows():
+    for idx, row in filtered_df.iterrows():
         # 상태에 따른 색상 결정
         if row['status'] == 1:
             marker_color = 'red'    # 금연구역
@@ -83,7 +88,7 @@ with col2:
     st.write("폐쇄가 의심되는 경우 제보해주세요.")
     
     # 제보할 장소 선택
-    target_place = st.selectbox("장소 선택", df['name'])
+    target_place = st.selectbox("장소 선택", filtered_df['name'])
     
     # 선택된 장소의 현재 정보 가져오기
     target_index = df[df['name'] == target_place].index[0]
