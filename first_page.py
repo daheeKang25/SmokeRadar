@@ -104,7 +104,7 @@ st.markdown("""
             아래 지역 중 원하시는 지역을 선택하면<br>
             해당 지역의 흡연구역 정보를 볼 수 있습니다.
         </div>
-        <div class="caption">※서울시 성동구를 선택해주세요!
+        <div class="caption">※서울시 성동구와 용산구를 선택해주세요!
         </div>
         <div class="maintext">
             한양여대 빅데이터과<br>
@@ -126,7 +126,7 @@ with col_main:
             si_do = st.selectbox("시/도 선택", ["서울시", "경기도"], label_visibility="collapsed")
             
         with c2:
-            gu_gun = st.selectbox("구/군 선택", ["성동구", "성북구", "서초구","용산구", "강남구", "중구", "종로구"], label_visibility="collapsed")
+            gu_gun = st.selectbox("구/군 선택", ["성동구", "용산구", "서초구","성북구", "강남구", "중구", "종로구"], label_visibility="collapsed")
             
         with c3:
             # 검색 버튼
