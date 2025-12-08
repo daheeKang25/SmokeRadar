@@ -91,7 +91,7 @@ with col2:
     target_place = st.selectbox("장소 선택", filtered_df['name'])
     
     # 선택된 장소의 현재 정보 가져오기
-    target_index = df[df['name'] == target_place].index[0]
+    target_index = filtered_df[filtered_df['name'] == target_place].index[0]
     current_score = df.loc[target_index, 'reliability']
     
     st.metric(label="현재 신뢰도 점수", value=f"{current_score}점")
@@ -109,7 +109,7 @@ with col2:
         st.toast(f"※반영 완료! {target_place}의 현재 신뢰도 점수: {new_score}점※")
         
         if new_score < 70 and current_score >= 70:
-            st.toast("※신뢰도 하락으로 상태가 **'보류'**로 변경됩니다.※")
+            st.toast("※신뢰도 하락으로 상태가 '보류'로 변경됩니다.※")
         
         time.sleep(1.5)
         st.rerun()
