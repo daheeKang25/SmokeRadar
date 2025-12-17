@@ -104,11 +104,11 @@ st.markdown("""
             아래 지역 중 원하시는 지역을 선택하면<br>
             해당 지역의 흡연구역 정보를 볼 수 있습니다.
         </div>
-        <div class="caption">※서울시 성동구와 용산구를 선택해주세요!
+        <div class="caption">※서울시 성동구를 선택해주세요!
         </div>
         <div class="maintext">
             한양여대 빅데이터과<br>
-            데이터과학 미니 프로젝트<br>
+            강다희 / 김여정 / 박이은<br>
             비흡연자 팀
         </div>
     </div>
@@ -136,3 +136,4 @@ with col_main:
 if search_click:
     st.success(f"'{si_do} {gu_gun}' 지역의 흡연구역을 검색합니다!")
     st.switch_page("pages/app.py")
+
